@@ -57,9 +57,9 @@ public class VectorsTest {
 		
 		aVector.add(bVector);
 		
-		Assert.assertEquals(1.0f, aVector.getActiveFeatures().get("one"), 0.0001f);
-		Assert.assertEquals(1.0f, aVector.getActiveFeatures().get("two"), 0.0001f);
-		Assert.assertEquals(2.0f, aVector.getActiveFeatures().get("three"), 0.0001f);	
+		Assert.assertEquals(1.0f, aVector.getActiveFeatures().get("one").floatValue(), 0.0001f);
+		Assert.assertEquals(1.0f, aVector.getActiveFeatures().get("two").floatValue(), 0.0001f);
+		Assert.assertEquals(2.0f, aVector.getActiveFeatures().get("three").floatValue(), 0.0001f);	
 	}
 	
 	@Test
@@ -81,9 +81,9 @@ public class VectorsTest {
 		
 		aVector.add(2.0f, bVector);
 		
-		Assert.assertEquals(1.0f, aVector.getActiveFeatures().get("one"), 0.0001f);
-		Assert.assertEquals(2.0f, aVector.getActiveFeatures().get("two"), 0.0001f);
-		Assert.assertEquals(3.0f, aVector.getActiveFeatures().get("three"), 0.0001f);	
+		Assert.assertEquals(1.0f, aVector.getActiveFeatures().get("one").floatValue(), 0.0001f);
+		Assert.assertEquals(2.0f, aVector.getActiveFeatures().get("two").floatValue(), 0.0001f);
+		Assert.assertEquals(3.0f, aVector.getActiveFeatures().get("three").floatValue(), 0.0001f);	
 	}
 	
 	@Test
@@ -109,7 +109,7 @@ public class VectorsTest {
 		
 		Assert.assertNull(aVector.getActiveFeatures().get("one"));
 		Assert.assertNull(aVector.getActiveFeatures().get("two"));
-		Assert.assertEquals(1.0f, aVector.getActiveFeatures().get("three"), 0.0001f);	
+		Assert.assertEquals(1.0f, aVector.getActiveFeatures().get("three").floatValue(), 0.0001f);	
 	}
 	
 	@Test
