@@ -1,4 +1,4 @@
-package it.uniroma2.sag.kelp.algorithms.binary;
+package it.uniroma2.sag.kelp.algorithms.oneclass;
 
 import it.uniroma2.sag.kelp.data.dataset.SimpleDataset;
 import it.uniroma2.sag.kelp.data.example.Example;
@@ -6,8 +6,9 @@ import it.uniroma2.sag.kelp.data.label.Label;
 import it.uniroma2.sag.kelp.data.label.StringLabel;
 import it.uniroma2.sag.kelp.kernel.Kernel;
 import it.uniroma2.sag.kelp.kernel.cache.FixIndexKernelCache;
+import it.uniroma2.sag.kelp.kernel.standard.RbfKernel;
 import it.uniroma2.sag.kelp.kernel.vector.LinearKernel;
-import it.uniroma2.sag.kelp.learningalgorithm.classification.libsvm.BinaryCSvmClassification;
+import it.uniroma2.sag.kelp.learningalgorithm.classification.libsvm.OneClassSvmClassification;
 import it.uniroma2.sag.kelp.predictionfunction.classifier.ClassificationOutput;
 import it.uniroma2.sag.kelp.predictionfunction.classifier.Classifier;
 import it.uniroma2.sag.kelp.utils.evaluation.BinaryClassificationEvaluator;
@@ -26,7 +27,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class BinaryCSVMTest {
+public class OneClassSVMTest {
 	// Accuracy: 0.9766667
 	// F1 = 0.9769737
 	private static Classifier f = null;
@@ -41,9 +42,10 @@ public class BinaryCSVMTest {
 		trainingSet = new SimpleDataset();
 		testSet = new SimpleDataset();
 		try {
-			trainingSet.populate("src/test/resources/svmTest/binary/binary_train.klp");
+			trainingSet
+					.populate("src/test/resources/svmTest/one-class/one-class_train.klp");
 			// Read a dataset into a test variable
-			testSet.populate("src/test/resources/svmTest/binary/binary_test.klp");
+			testSet.populate("src/test/resources/svmTest/one-class/one-class_test.klp");
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.assertTrue(false);
@@ -54,14 +56,15 @@ public class BinaryCSVMTest {
 
 		// define the kernel
 		Kernel kernel = new LinearKernel("0");
+		kernel = new RbfKernel(1, kernel);
 
 		// add a cache
 		kernel.setKernelCache(new FixIndexKernelCache(trainingSet
 				.getNumberOfExamples()));
 
 		// define the learning algorithm
-		BinaryCSvmClassification learner = new BinaryCSvmClassification(kernel,
-				positiveClass, 1, 1);
+		OneClassSvmClassification learner = new OneClassSvmClassification(
+				kernel, positiveClass, 0.5f);
 
 		// learn and get the prediction function
 		learner.learn(trainingSet);
@@ -72,7 +75,7 @@ public class BinaryCSVMTest {
 	public static void loadClassificationScores() {
 		try {
 			scores = new ArrayList<Float>();
-			String filepath = "src/test/resources/svmTest/binary/binaryCSvm/outScores_libsvm_c-svm.txt";
+			String filepath = "src/test/resources/svmTest/one-class/outScores_libsvm_one-class.txt";
 			BufferedReader in = null;
 			String encoding = "UTF-8";
 			if (filepath.endsWith(".gz")) {
@@ -113,24 +116,7 @@ public class BinaryCSVMTest {
 
 		try {
 			float acc = ev.getPerformanceMeasure("getAccuracy");
-			Assert.assertEquals(0.9766667f, acc, 0.000001);
-		} catch (NoSuchPerformanceMeasureException e1) {
-			e1.printStackTrace();
-		}
-	}
-
-	@Test
-	public void testF1() {
-		BinaryClassificationEvaluator ev = new BinaryClassificationEvaluator(
-				positiveClass);
-		for (Example e : testSet.getExamples()) {
-			ClassificationOutput p = f.predict(e);
-			ev.addCount(e, p);
-		}
-
-		try {
-			float acc = ev.getPerformanceMeasure("getF1");
-			Assert.assertEquals(0.9769737f, acc, 0.000001);
+			Assert.assertEquals(0.3566667f, acc, 0.000001);
 		} catch (NoSuchPerformanceMeasureException e1) {
 			e1.printStackTrace();
 		}

@@ -7,7 +7,7 @@ import it.uniroma2.sag.kelp.data.label.StringLabel;
 import it.uniroma2.sag.kelp.kernel.Kernel;
 import it.uniroma2.sag.kelp.kernel.cache.FixIndexKernelCache;
 import it.uniroma2.sag.kelp.kernel.vector.LinearKernel;
-import it.uniroma2.sag.kelp.learningalgorithm.classification.libsvm.BinaryCSvmClassification;
+import it.uniroma2.sag.kelp.learningalgorithm.classification.libsvm.BinaryNuSvmClassification;
 import it.uniroma2.sag.kelp.predictionfunction.classifier.ClassificationOutput;
 import it.uniroma2.sag.kelp.predictionfunction.classifier.Classifier;
 import it.uniroma2.sag.kelp.utils.evaluation.BinaryClassificationEvaluator;
@@ -26,7 +26,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class BinaryCSVMTest {
+public class BinaryNuSVMTest {
 	// Accuracy: 0.9766667
 	// F1 = 0.9769737
 	private static Classifier f = null;
@@ -60,8 +60,8 @@ public class BinaryCSVMTest {
 				.getNumberOfExamples()));
 
 		// define the learning algorithm
-		BinaryCSvmClassification learner = new BinaryCSvmClassification(kernel,
-				positiveClass, 1, 1);
+		BinaryNuSvmClassification learner = new BinaryNuSvmClassification(kernel,
+				positiveClass, 0.5f);
 
 		// learn and get the prediction function
 		learner.learn(trainingSet);
@@ -72,7 +72,7 @@ public class BinaryCSVMTest {
 	public static void loadClassificationScores() {
 		try {
 			scores = new ArrayList<Float>();
-			String filepath = "src/test/resources/svmTest/binary/binaryCSvm/outScores_libsvm_c-svm.txt";
+			String filepath = "src/test/resources/svmTest/binary/binaryNuSvm/outScores_libsvm_nu-svm.txt";
 			BufferedReader in = null;
 			String encoding = "UTF-8";
 			if (filepath.endsWith(".gz")) {
@@ -113,28 +113,12 @@ public class BinaryCSVMTest {
 
 		try {
 			float acc = ev.getPerformanceMeasure("getAccuracy");
-			Assert.assertEquals(0.9766667f, acc, 0.000001);
+			Assert.assertEquals(0.9666667f, acc, 0.000001);
 		} catch (NoSuchPerformanceMeasureException e1) {
 			e1.printStackTrace();
 		}
 	}
 
-	@Test
-	public void testF1() {
-		BinaryClassificationEvaluator ev = new BinaryClassificationEvaluator(
-				positiveClass);
-		for (Example e : testSet.getExamples()) {
-			ClassificationOutput p = f.predict(e);
-			ev.addCount(e, p);
-		}
-
-		try {
-			float acc = ev.getPerformanceMeasure("getF1");
-			Assert.assertEquals(0.9769737f, acc, 0.000001);
-		} catch (NoSuchPerformanceMeasureException e1) {
-			e1.printStackTrace();
-		}
-	}
 
 	@Test
 	public void checkScores() {
