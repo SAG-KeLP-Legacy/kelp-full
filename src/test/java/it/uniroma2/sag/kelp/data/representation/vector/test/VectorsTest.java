@@ -15,11 +15,16 @@
 
 package it.uniroma2.sag.kelp.data.representation.vector.test;
 
+import java.util.Map;
+
+import gnu.trove.map.TIntFloatMap;
 import it.uniroma2.sag.kelp.data.example.Example;
 import it.uniroma2.sag.kelp.data.example.ExampleFactory;
+import it.uniroma2.sag.kelp.data.representation.Vector;
 import it.uniroma2.sag.kelp.data.representation.vector.DenseVector;
 import it.uniroma2.sag.kelp.data.representation.vector.SparseVector;
 
+import org.ejml.data.DenseMatrix64F;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -146,5 +151,53 @@ public class VectorsTest {
 		
 		Assert.assertEquals(1.0f, innerProduct, 0.000001f);
 	}
+	
+	@Test
+	public void testCopySparse() {
+		SparseVector aVector = (SparseVector) a.getRepresentation(sparseName);
+		Vector copyVector = aVector.copyVector();
+		SparseVector copy = (SparseVector) copyVector;
+		
+		Assert.assertNotSame(copy, aVector);
+		
+		Assert.assertEquals(aVector.getTextFromData(), copy.getTextFromData());
+		
+		TIntFloatMap origMap = aVector.getVector();
+		TIntFloatMap copyMap = copy.getVector();
+		
+		Assert.assertEquals(origMap.size(), copyMap.size());
+		
+		for (int i : origMap.keys()) {
+			Assert.assertEquals(origMap.get(i), copyMap.get(i), 0.000001f);
+		}
 
+		Map<String, Number> activeFeaturesOrig = aVector.getActiveFeatures();
+		Map<String, Number> activeFeaturesCopy = copy.getActiveFeatures();
+		
+		Assert.assertEquals(activeFeaturesOrig.size(), activeFeaturesCopy.size());
+		
+		for (String a : activeFeaturesOrig.keySet()) {
+			Assert.assertEquals(activeFeaturesOrig.get(a).doubleValue(), activeFeaturesCopy.get(a).doubleValue(), 0.000001f);
+		}
+	}
+	
+	@Test
+	public void testCopyDense() {
+		DenseVector aVector = (DenseVector) a.getRepresentation(denseName);
+		Vector copyVector = aVector.copyVector();
+		DenseVector copy = (DenseVector) copyVector;
+		
+		Assert.assertEquals(aVector.getTextFromData(), copy.getTextFromData());
+		Assert.assertNotSame(copy, aVector);
+		
+		DenseMatrix64F featureValuesOIrig = aVector.getFeatureValues();
+		DenseMatrix64F featureValuesCopy = copy.getFeatureValues();
+		
+		Assert.assertEquals(featureValuesOIrig.numCols, featureValuesCopy.numCols);
+		Assert.assertEquals(featureValuesOIrig.numRows, featureValuesCopy.numRows);
+		
+		for (int i=0; i<featureValuesCopy.data.length; ++i) {
+			Assert.assertEquals(featureValuesOIrig.data[i], featureValuesCopy.data[i], 0.000000001f);
+		}
+	}
 }
