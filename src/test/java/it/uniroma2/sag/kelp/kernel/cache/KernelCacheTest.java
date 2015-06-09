@@ -21,7 +21,7 @@ public class KernelCacheTest {
 		dataset = new SimpleDataset();
 		dataset.shuffleExamples(new Random());
 		try {
-			dataset.populate("src/test/resources/svmTest/binary/binary_train.klp");
+			dataset.populate("src/test/resources/svmTest/binary/binary_test.klp");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -31,6 +31,15 @@ public class KernelCacheTest {
 
 	}
 
+	@Test
+	public void checkStripeKernelCache() {
+		StripeKernelCache cache = new StripeKernelCache(dataset);
+		checkNCorrectlyStored(cache, dataset, dataset.getNumberOfExamples()
+				* dataset.getNumberOfExamples()-dataset.getNumberOfExamples());
+		StripeKernelCache smallCache = new StripeKernelCache(dataset, 10);
+		checkNCorrectlyStored(smallCache, dataset, dataset.getNumberOfExamples());
+	}
+	
 	@Test
 	public void checkFixIndexKernelCache() {
 		FixIndexKernelCache cache = new FixIndexKernelCache(dataset.getNumberOfExamples());
