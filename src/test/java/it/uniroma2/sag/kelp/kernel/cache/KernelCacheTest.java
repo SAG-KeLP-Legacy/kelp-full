@@ -17,11 +17,12 @@ public class KernelCacheTest {
 	private static Kernel kernel;
 
 	@BeforeClass
-	public static void learnModel() {
+	public static void loadDatasetAndPrepareKernel() {
 		dataset = new SimpleDataset();
-		dataset.shuffleExamples(new Random());
+		
 		try {
 			dataset.populate("src/test/resources/svmTest/binary/binary_test.klp");
+			dataset.shuffleExamples(new Random());
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -40,7 +41,7 @@ public class KernelCacheTest {
 		StripeKernelCache smallCache = new StripeKernelCache(dataset, nRows);
 		checkFistRowsCorrectlyStored(smallCache, dataset, nRows,
 				dataset.getNumberOfExamples() * nRows - nRows);
-		smallCache.flushCache();
+		
 		checkNCorrectlyStored(smallCache, dataset, nRows);	
 	}
 
