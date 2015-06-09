@@ -127,7 +127,7 @@ public class BinaryCSVMTest {
 		}
 
 		try {
-			float acc = ev.getPerformanceMeasure("getAccuracy");
+			float acc = ev.getPerformanceMeasure("accuracy");
 			Assert.assertEquals(0.9766667f, acc, 0.000001);
 		} catch (NoSuchPerformanceMeasureException e1) {
 			e1.printStackTrace();
@@ -144,7 +144,7 @@ public class BinaryCSVMTest {
 		}
 
 		try {
-			float acc = ev.getPerformanceMeasure("getF1");
+			float acc = ev.getPerformanceMeasure("f1");
 			Assert.assertEquals(0.9769737f, acc, 0.000001);
 		} catch (NoSuchPerformanceMeasureException e1) {
 			e1.printStackTrace();

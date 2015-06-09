@@ -130,7 +130,7 @@ public class OneClassSVMTest {
 		}
 
 		try {
-			float acc = ev.getPerformanceMeasure("getAccuracy");
+			float acc = ev.getPerformanceMeasure("accuracy");
 			Assert.assertEquals(0.3566667f, acc, 0.000001);
 		} catch (NoSuchPerformanceMeasureException e1) {
 			e1.printStackTrace();
