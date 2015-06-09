@@ -127,7 +127,7 @@ public class BinaryNuSVMTest {
 		}
 
 		try {
-			float acc = ev.getPerformanceMeasure("getAccuracy");
+			float acc = ev.getPerformanceMeasure("accuracy");
 			Assert.assertEquals(0.9666667f, acc, 0.000001);
 		} catch (NoSuchPerformanceMeasureException e1) {
 			e1.printStackTrace();
