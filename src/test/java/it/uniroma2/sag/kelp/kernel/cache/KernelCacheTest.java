@@ -35,9 +35,48 @@ public class KernelCacheTest {
 	public void checkStripeKernelCache() {
 		StripeKernelCache cache = new StripeKernelCache(dataset);
 		checkNCorrectlyStored(cache, dataset, dataset.getNumberOfExamples()
-				* dataset.getNumberOfExamples()-dataset.getNumberOfExamples());
-		StripeKernelCache smallCache = new StripeKernelCache(dataset, 10);
-		checkNCorrectlyStored(smallCache, dataset, dataset.getNumberOfExamples());
+				* dataset.getNumberOfExamples() - dataset.getNumberOfExamples());
+		int nRows = 20;
+		StripeKernelCache smallCache = new StripeKernelCache(dataset, nRows);
+		checkFistRowsCorrectlyStored(smallCache, dataset, nRows,
+				dataset.getNumberOfExamples() * nRows - nRows);
+		smallCache.flushCache();
+		checkNCorrectlyStored(smallCache, dataset, nRows);	
+	}
+
+	public void checkFistRowsCorrectlyStored(KernelCache cache,
+			SimpleDataset dataset, int maxRows, int expectedHits) {
+
+		kernel.setKernelCache(cache);
+		int counter = 0;
+		for (Example ex1 : dataset.getExamples()) {
+			for (Example ex2 : dataset.getExamples()) {
+				kernel.innerProduct(ex1, ex2);
+			}
+			counter++;
+			if (counter >= maxRows)
+				break;
+		}
+		kernel.disableCache();
+
+		int hits = 0;
+		counter = 0;
+		for (Example ex1 : dataset.getExamples()) {
+			for (Example ex2 : dataset.getExamples()) {
+				float val = kernel.innerProduct(ex1, ex2);
+				Float cachedVal = cache.getKernelValue(ex1, ex2);
+				if (cachedVal != null) {
+					Assert.assertEquals(val, cachedVal.floatValue(), 0.00001f);
+					hits++;
+				}
+			}
+			counter++;
+			if (counter >= maxRows)
+				break;
+		}
+
+		Assert.assertTrue(hits >= expectedHits);
+		cache.flushCache();
 	}
 	
 	@Test
