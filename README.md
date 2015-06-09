@@ -49,7 +49,7 @@ Then, the [Maven][maven-site] dependency for the whole **KeLP** package:
 <dependency>
     <groupId>it.uniroma2.sag.kelp</groupId>
     <artifactId>kelp-full</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.1</version>
 </dependency>
 ```
 
