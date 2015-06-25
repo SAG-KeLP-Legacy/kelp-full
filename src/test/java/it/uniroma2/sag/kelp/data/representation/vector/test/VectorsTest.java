@@ -170,12 +170,12 @@ public class VectorsTest {
 			Assert.assertEquals(origMap.get(i), copyMap.get(i), 0.000001f);
 		}
 
-		Map<String, Number> activeFeaturesOrig = aVector.getActiveFeatures();
-		Map<String, Number> activeFeaturesCopy = copy.getActiveFeatures();
+		Map<Object, Number> activeFeaturesOrig = aVector.getActiveFeatures();
+		Map<Object, Number> activeFeaturesCopy = copy.getActiveFeatures();
 		
 		Assert.assertEquals(activeFeaturesOrig.size(), activeFeaturesCopy.size());
 		
-		for (String a : activeFeaturesOrig.keySet()) {
+		for (Object a : activeFeaturesOrig.keySet()) {
 			Assert.assertEquals(activeFeaturesOrig.get(a).doubleValue(), activeFeaturesCopy.get(a).doubleValue(), 0.000001f);
 		}
 	}
