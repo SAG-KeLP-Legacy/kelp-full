@@ -25,6 +25,8 @@ import it.uniroma2.sag.kelp.kernel.vector.LinearKernel;
 import it.uniroma2.sag.kelp.learningalgorithm.regression.libsvm.EpsilonSvmRegression;
 import it.uniroma2.sag.kelp.predictionfunction.Prediction;
 import it.uniroma2.sag.kelp.predictionfunction.PredictionFunction;
+import it.uniroma2.sag.kelp.utils.evaluation.RegressorEvaluator;
+import it.uniroma2.sag.kelp.utils.exception.NoSuchPerformanceMeasureException;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -128,6 +130,32 @@ public class EpsilonSVRTest {
 		}
 		mse /= (float) testSet.getExamples().size();
 		Assert.assertEquals(0.0212349f, mse, 0.0001);
+	}
+	
+	@Test
+	public void testMSEWithEvaluator() throws NoSuchPerformanceMeasureException {
+		RegressorEvaluator evaluator = new RegressorEvaluator(trainingSet.getRegressionProperties());
+		for (int i = 0; i < testSet.getExamples().size(); ++i) {
+			Example e = testSet.getExample(i);
+			Prediction score = p.predict(e);
+			evaluator.addCount(e, score);
+		}
+		evaluator.compute();
+		float mse = evaluator.getMeanError(regressionLabel);
+		Assert.assertEquals(0.0212349f, mse, 0.0001);
+	}
+	
+	@Test
+	public void testMSEWithEvaluatorAndReflection() throws NoSuchPerformanceMeasureException {
+		RegressorEvaluator evaluator = new RegressorEvaluator(trainingSet.getRegressionProperties());
+		for (int i = 0; i < testSet.getExamples().size(); ++i) {
+			Example e = testSet.getExample(i);
+			Prediction score = p.predict(e);
+			evaluator.addCount(e, score);
+		}
+		
+		float mse1 = evaluator.getPerformanceMeasure("MeanErrors");
+		Assert.assertEquals(0.0212349f, mse1, 0.0001);
 	}
 
 	@Test
