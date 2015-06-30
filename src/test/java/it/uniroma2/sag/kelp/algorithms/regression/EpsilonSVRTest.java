@@ -141,7 +141,7 @@ public class EpsilonSVRTest {
 			evaluator.addCount(e, score);
 		}
 		evaluator.compute();
-		float mse = evaluator.getSquareMeanError(regressionLabel);
+		float mse = evaluator.getMeanSquaredError(regressionLabel);
 		Assert.assertEquals(0.0212349f, mse, 0.0001);
 	}
 	
@@ -154,7 +154,7 @@ public class EpsilonSVRTest {
 			evaluator.addCount(e, score);
 		}
 		
-		float mse1 = evaluator.getPerformanceMeasure("SquareMeanErrors");
+		float mse1 = evaluator.getPerformanceMeasure("MeanSquaredErrors");
 		Assert.assertEquals(0.0212349f, mse1, 0.0001);
 	}
 
