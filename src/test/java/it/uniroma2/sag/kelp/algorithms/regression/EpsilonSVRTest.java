@@ -140,7 +140,6 @@ public class EpsilonSVRTest {
 			Prediction score = p.predict(e);
 			evaluator.addCount(e, score);
 		}
-		evaluator.compute();
 		float mse = evaluator.getMeanSquaredError(regressionLabel);
 		Assert.assertEquals(0.0212349f, mse, 0.0001);
 	}

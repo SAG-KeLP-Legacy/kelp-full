@@ -73,7 +73,6 @@ public class LibsvmFormatReaderClassificationTest {
 			Prediction pred = classifier.predict(ex);
 			ev.addCount(ex, pred);
 		}
-		ev.compute();
 		Assert.assertTrue(ev.getAccuracy()>=0.838448 - 0.0001f);
 	}
 	

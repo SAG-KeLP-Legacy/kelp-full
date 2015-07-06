@@ -96,7 +96,6 @@ public class LibLinearDenseVsSparseClassificationEvaluator {
 			sparseScores.add(predict.getScore(l));
 		}
 
-		evaluator.compute();
 		return evaluator.getMeanF1();
 	}
 
@@ -124,7 +123,6 @@ public class LibLinearDenseVsSparseClassificationEvaluator {
 			denseScores.add(predict.getScore(l));
 		}
 
-		evaluator.compute();
 		return evaluator.getMeanF1();
 	}
 
