@@ -167,13 +167,13 @@
 		</dependency>
 		<dependency>
 			<groupId>it.uniroma2.sag.kelp</groupId>
-			<artifactId>discreterepresentation</artifactId>
+			<artifactId>kernel-clustering</artifactId>
 			<version>1.1.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>it.uniroma2.sag.kelp</groupId>
-			<artifactId>kernel-clustering</artifactId>
-			<version>1.1.1-SNAPSHOT</version>
+			<artifactId>graph-kernel</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>
