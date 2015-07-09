@@ -13,9 +13,13 @@ It aggregates the following modules:
 
 * [discrete-representation](https://github.com/SAG-KeLP/discrete-representation): it contains *TreeRepresentation*, *SequenceRepresentation* and *StringRepresentation*;
 
+* [graph-representation](https://github.com/SAG-KeLP/graph-representation): it contains *DirectedGraphRepresentation*;
+
 * [standard-kernel](https://github.com/SAG-KeLP/standard-kernel): it contains common kernel functions, such as the *PolynomialKernel* and the *RbfKernel*;
 
-* [tree-kernel](https://github.com/SAG-KeLP/tree-kernel): it contains several convolution kernel, such as *SubTreeKernel*, *SubSetTreeKernel*, *PartialTreeKernel*, *SmoothedPartialTreeKernel* and *SequenceKernel*;
+* [tree-kernel](https://github.com/SAG-KeLP/tree-kernel): it contains several convolution kernels, such as *SubTreeKernel*, *SubSetTreeKernel*, *PartialTreeKernel*, *SmoothedPartialTreeKernel* and *SequenceKernel*;
+
+* [graph-kernel](https://github.com/SAG-KeLP/graph-kernel): it contains graph kernels, such as *ShortestPathKernel* and the Weisfeiler-Lehman Subtree Kernel for Graphs;
 
 * [batch-learning-margin](https://github.com/SAG-KeLP/batch-large-margin): it contains the implementation of several svm algorithms for classification and regression and the corresponding prediction function; for instance it includes *OneClassClassification*, *PegasosLearningAlgorithm*, *CSvmClassification* or *LibLinearRegression*;
 
