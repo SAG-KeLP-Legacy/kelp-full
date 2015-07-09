@@ -80,4 +80,30 @@ public class EvaluatorTest {
 		}
 		Assert.assertTrue(true);
 	}
+	
+	@Test
+	public void directMethodCallingOnBinaryTest() {
+		BinaryClassificationEvaluator ev = new BinaryClassificationEvaluator(new StringLabel("one"));
+		ev.getAccuracy();
+		ev.getF1();
+		ev.getPrecision();
+		ev.getRecall();
+	}
+	
+	@Test
+	public void directMethodCallingOnMulticlassTest() {
+		MulticlassClassificationEvaluator ev = new MulticlassClassificationEvaluator(labels);
+		ev.getAccuracy();
+		ev.getMeanF1();
+		Label l = new StringLabel("one");
+		ev.getPrecisionFor(l);
+		ev.getRecallFor(l);
+		ev.getF1For(l);
+		ev.getOverallPrecision();
+		ev.getOverallRecall();
+		ev.getOverallF1();
+		ev.getRecalls();
+		ev.getPrecisions();
+		ev.getF1s();
+	}
 }

@@ -15,14 +15,13 @@
 
 package it.uniroma2.sag.kelp.data.representation.vector.test;
 
-import java.util.Map;
-
 import gnu.trove.map.TIntFloatMap;
 import it.uniroma2.sag.kelp.data.example.Example;
 import it.uniroma2.sag.kelp.data.example.ExampleFactory;
-import it.uniroma2.sag.kelp.data.representation.Vector;
 import it.uniroma2.sag.kelp.data.representation.vector.DenseVector;
 import it.uniroma2.sag.kelp.data.representation.vector.SparseVector;
+
+import java.util.Map;
 
 import org.ejml.data.DenseMatrix64F;
 import org.junit.Assert;
@@ -155,7 +154,7 @@ public class VectorsTest {
 	@Test
 	public void testCopySparse() {
 		SparseVector aVector = (SparseVector) a.getRepresentation(sparseName);
-		Vector copyVector = aVector.copyVector();
+		SparseVector copyVector = aVector.copyVector();
 		SparseVector copy = (SparseVector) copyVector;
 		
 		Assert.assertNotSame(copy, aVector);
@@ -171,12 +170,12 @@ public class VectorsTest {
 			Assert.assertEquals(origMap.get(i), copyMap.get(i), 0.000001f);
 		}
 
-		Map<String, Number> activeFeaturesOrig = aVector.getActiveFeatures();
-		Map<String, Number> activeFeaturesCopy = copy.getActiveFeatures();
+		Map<Object, Number> activeFeaturesOrig = aVector.getActiveFeatures();
+		Map<Object, Number> activeFeaturesCopy = copy.getActiveFeatures();
 		
 		Assert.assertEquals(activeFeaturesOrig.size(), activeFeaturesCopy.size());
 		
-		for (String a : activeFeaturesOrig.keySet()) {
+		for (Object a : activeFeaturesOrig.keySet()) {
 			Assert.assertEquals(activeFeaturesOrig.get(a).doubleValue(), activeFeaturesCopy.get(a).doubleValue(), 0.000001f);
 		}
 	}
@@ -184,7 +183,7 @@ public class VectorsTest {
 	@Test
 	public void testCopyDense() {
 		DenseVector aVector = (DenseVector) a.getRepresentation(denseName);
-		Vector copyVector = aVector.copyVector();
+		DenseVector copyVector = aVector.copyVector();
 		DenseVector copy = (DenseVector) copyVector;
 		
 		Assert.assertEquals(aVector.getTextFromData(), copy.getTextFromData());
