@@ -28,7 +28,7 @@ public class Learn {
 		// Instantiate a learning algorithm through a Json file
 		JacksonSerializerWrapper serializer = new JacksonSerializerWrapper();
 		LearningAlgorithm learner = serializer.readValue(new File(jsonPath), LearningAlgorithm.class);
-
+		
 		// Set classes if not specified in Json file
 		if (learner.getLabels() == null || learner.getLabels().size() == 0) {
 			List<Label> classes = trainSet.getClassificationLabels();

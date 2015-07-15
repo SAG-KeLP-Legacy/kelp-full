@@ -16,7 +16,7 @@
 package it.uniroma2.sag.kelp.data.example;
 
 import it.uniroma2.sag.kelp.kernel.Kernel;
-import it.uniroma2.sag.kelp.kernel.overPairs.PreferenceKernel;
+import it.uniroma2.sag.kelp.kernel.onPairs.PreferenceKernel;
 import it.uniroma2.sag.kelp.kernel.standard.LinearKernelCombination;
 import it.uniroma2.sag.kelp.kernel.vector.LinearKernel;
 
