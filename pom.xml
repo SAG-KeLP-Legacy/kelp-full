@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>it.uniroma2.sag.kelp</groupId>
   <artifactId>kelp-full</artifactId>
-  <version>1.2.1-SNAPSHOT</version>
+  <version>1.2.1</version>
   <url>http://sag.art.uniroma2.it/demo-software/kelp/</url>
 	<organization>
 		<name>Semantic Analytics Group @ Uniroma2</name>
@@ -138,47 +138,47 @@
 		<dependency>
 			<groupId>it.uniroma2.sag.kelp</groupId>
 			<artifactId>standard-kernel</artifactId>
-			<version>1.2.1-SNAPSHOT</version>
+			<version>1.2.1</version>
 		</dependency>
 		<dependency>
 			<groupId>it.uniroma2.sag.kelp</groupId>
 			<artifactId>tree-kernel</artifactId>
-			<version>1.2.1-SNAPSHOT</version>
+			<version>1.2.1</version>
 		</dependency>
 		<dependency>
 			<groupId>it.uniroma2.sag.kelp</groupId>
 			<artifactId>online-large-margin</artifactId>
-			<version>1.2.1-SNAPSHOT</version>
+			<version>1.2.1</version>
 		</dependency>
 		<dependency>
 			<groupId>it.uniroma2.sag.kelp</groupId>
 			<artifactId>batch-large-margin</artifactId>
-			<version>1.2.1-SNAPSHOT</version>
+			<version>1.2.1</version>
 		</dependency>
 		<dependency>
 			<groupId>it.uniroma2.sag.kelp</groupId>
 			<artifactId>core</artifactId>
-			<version>1.2.1-SNAPSHOT</version>
+			<version>1.2.1</version>
 		</dependency>
 		<dependency>
 			<groupId>it.uniroma2.sag.kelp</groupId>
 			<artifactId>vector-representation</artifactId>
-			<version>1.2.1-SNAPSHOT</version>
+			<version>1.2.1</version>
 		</dependency>
 		<dependency>
 			<groupId>it.uniroma2.sag.kelp</groupId>
 			<artifactId>discreterepresentation</artifactId>
-			<version>1.2.1-SNAPSHOT</version>
+			<version>1.2.1</version>
 		</dependency>
 		<dependency>
 			<groupId>it.uniroma2.sag.kelp</groupId>
 			<artifactId>kernel-clustering</artifactId>
-			<version>1.2.1-SNAPSHOT</version>
+			<version>1.2.1</version>
 		</dependency>
 		<dependency>
 			<groupId>it.uniroma2.sag.kelp</groupId>
 			<artifactId>graph-kernel</artifactId>
-			<version>0.0.2-SNAPSHOT</version>
+			<version>0.0.2</version>
 		</dependency>
 	</dependencies>
 </project>
