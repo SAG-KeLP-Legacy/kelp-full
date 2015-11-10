@@ -57,6 +57,9 @@ public class ExamplePairSerializationTest {
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 			Assert.fail();
+		} catch (ParsingExampleException e) {
+			e.printStackTrace();
+			Assert.fail();
 		}
 	
 

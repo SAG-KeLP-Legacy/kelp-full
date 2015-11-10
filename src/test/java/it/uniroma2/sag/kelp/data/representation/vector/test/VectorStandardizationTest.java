@@ -20,6 +20,7 @@ import java.io.IOException;
 import it.uniroma2.sag.kelp.data.dataset.SimpleDataset;
 import it.uniroma2.sag.kelp.data.example.Example;
 import it.uniroma2.sag.kelp.data.example.ExampleFactory;
+import it.uniroma2.sag.kelp.data.example.ParsingExampleException;
 import it.uniroma2.sag.kelp.data.manipulator.StandardizationManipulator;
 import it.uniroma2.sag.kelp.data.representation.vector.DenseVector;
 import it.uniroma2.sag.kelp.data.representation.vector.SparseVector;
@@ -60,6 +61,9 @@ public class VectorStandardizationTest {
 			dataset.addExample(b);
 			dataset.addExample(c);
 		} catch (InstantiationException e) {
+			e.printStackTrace();
+			Assert.fail();
+		} catch (ParsingExampleException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}

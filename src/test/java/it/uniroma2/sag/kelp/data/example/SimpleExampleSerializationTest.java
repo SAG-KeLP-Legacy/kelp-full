@@ -64,6 +64,9 @@ public class SimpleExampleSerializationTest {
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 			Assert.fail();
+		} catch (ParsingExampleException e) {
+			e.printStackTrace();
+			Assert.fail();
 		}
 		
 		Kernel kernelOnDense = new PolynomialKernel(2, new LinearKernel(DENSE_NAME));

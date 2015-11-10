@@ -18,6 +18,7 @@ package it.uniroma2.sag.kelp.data.representation.vector.test;
 import gnu.trove.map.TIntFloatMap;
 import it.uniroma2.sag.kelp.data.example.Example;
 import it.uniroma2.sag.kelp.data.example.ExampleFactory;
+import it.uniroma2.sag.kelp.data.example.ParsingExampleException;
 import it.uniroma2.sag.kelp.data.representation.vector.DenseVector;
 import it.uniroma2.sag.kelp.data.representation.vector.SparseVector;
 
@@ -48,10 +49,16 @@ public class VectorsTest {
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 			Assert.fail();
+		} catch (ParsingExampleException e) {
+			e.printStackTrace();
+			Assert.fail();
 		}
 		try {
 			b = ExampleFactory.parseExample(reprB);
 		} catch (InstantiationException e) {
+			e.printStackTrace();
+			Assert.fail();
+		} catch (ParsingExampleException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
